@@ -6,38 +6,35 @@
   <meta name="description" content="Internal pricing, quote, and invoice software for a Fox Cities plumbing company.">
   <title>KW Plumbing Office</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%23162f49%22/><text x=%2232%22 y=%2240%22 text-anchor=%22middle%22 font-size=%2224%22 font-family=%22Arial%22 font-weight=%22700%22 fill=%22white%22>KW</text></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="shell">
     <aside class="sidebar" id="sidebar">
-      <div class="brand"><div class="brand-mark">KW</div><div><strong id="sideCompany">KW Plumbing</strong><span>Field Office</span></div></div>
+      <div class="brand"><div class="brand-mark">KW</div><div><strong id="sideCompany">KW Plumbing</strong><span>Office</span></div></div>
       <nav>
-        <button class="nav active" data-view="dashboard">⌂ <span>Dashboard</span></button>
-        <button class="nav" data-view="rates">$ <span>Labor & Charges</span></button>
-        <button class="nav" data-view="services">▦ <span>Service Pricebook</span></button>
-        <button class="nav" data-view="quote">＋ <span>Quote Builder</span></button>
-        <button class="nav" data-view="invoice">▤ <span>Invoice Builder</span></button>
-        <button class="nav" data-view="settings">⚙ <span>Company Settings</span></button>
+        <button class="nav active" data-view="dashboard"><span>Home</span></button>
+        <button class="nav" data-view="quote"><span>New Quote</span></button>
+        <button class="nav" data-view="invoice"><span>Invoice</span></button>
+        <button class="nav" data-view="rates"><span>Labor Rates</span></button>
+        <button class="nav" data-view="services"><span>Services</span></button>
+        <button class="nav" data-view="settings"><span>Settings</span></button>
       </nav>
-      <div class="region-card"><b>APPLETON / FOX CITIES</b><span>Internal pricing prototype</span><small>Editable sample data</small></div>
+      <div class="region-card"><b>APPLETON / FOX CITIES</b><span>Data saves on this device</span></div>
     </aside>
 
     <main>
       <header class="topbar">
         <button class="menu" id="menuButton" aria-label="Open menu">☰</button>
-        <div><p class="eyebrow" id="pageEyebrow">OPERATIONS</p><h1 id="pageTitle">Dashboard</h1></div>
-        <div class="top-actions"><span id="saveState">Saved locally</span><button class="btn secondary" data-go="quote">Create Quote</button><button class="btn primary" data-go="invoice">Create Invoice</button></div>
+        <div><p class="eyebrow" id="pageEyebrow">OVERVIEW</p><h1 id="pageTitle">Home</h1></div>
+        <div class="top-actions"><span class="save-dot"></span><span id="saveState">Saved locally</span></div>
       </header>
 
       <section class="view active" id="dashboardView">
-        <div class="welcome card"><div><p class="eyebrow">RESIDENTIAL SERVICE PRICING</p><h2>Fast, consistent pricing for the field.</h2><p>Build upfront quotes, apply the initial-visit policy, and turn approved work into a professional invoice.</p></div><div class="welcome-actions"><button class="btn primary" data-go="quote">Create Quote</button><button class="btn outline" data-go="invoice">Create Invoice</button><button class="btn outline" data-go="services">Manage Pricebook</button></div></div>
+        <div class="welcome"><div><h2>Pricing and billing</h2><p>Create a quote, record parts and labor, then turn it into an invoice.</p></div><div class="welcome-actions"><button class="btn primary" data-go="quote">New Quote</button><button class="btn outline" data-go="invoice">Open Invoice</button></div></div>
         <div class="stats" id="dashboardStats"></div>
         <div class="dashboard-grid">
-          <article class="card policy"><div class="icon-tile">i</div><div><p class="eyebrow">PRICING POLICY</p><h3>Simple, upfront service pricing</h3><blockquote>“The $129 initial visit is applied toward an approved repair. Completed repairs start at $225. Provide upfront pricing before work begins.”</blockquote></div></article>
+          <article class="card policy"><div><p class="eyebrow">PRICING POLICY</p><h3>Upfront service pricing</h3><blockquote>The $129 initial visit is applied toward an approved repair. Completed repairs start at $225. Provide upfront pricing before work begins.</blockquote></div></article>
           <article class="card recent"><div class="section-head"><div><p class="eyebrow">CURRENT WORK</p><h3>Quote and invoice status</h3></div></div><div class="status-list"><div><span>Active quote</span><strong id="dashQuoteTotal">$0.00</strong></div><div><span>Invoice balance</span><strong id="dashInvoiceBalance">$0.00</strong></div><div><span>Invoice status</span><b class="status" id="dashInvoiceStatus">Draft</b></div></div></article>
         </div>
       </section>
@@ -56,7 +53,7 @@
         <div class="builder-layout">
           <div class="builder-main">
             <article class="card form-card">
-              <div class="section-head"><div><p class="eyebrow">STEP 1</p><h3>Customer and job</h3></div><div class="document-no"><span>Quote</span><b id="quoteNumberText">Q-0001</b></div></div>
+              <div class="section-head"><div><p class="eyebrow">1 · CUSTOMER</p><h3>Who is the job for?</h3></div><div class="document-no"><span>Quote</span><b id="quoteNumberText">Q-0001</b></div></div>
               <div class="form-grid">
                 <label>Saved customer<select id="quoteCustomerSelect"></select></label><label>Customer name<input id="quoteCustomerName" required></label>
                 <label>Phone<input id="quoteCustomerPhone"></label><label>Email<input id="quoteCustomerEmail" type="email"></label>
@@ -65,7 +62,7 @@
             </article>
 
             <article class="card form-card parts-card">
-              <div class="section-head"><div><p class="eyebrow">STEP 2</p><h3>One parts total</h3></div><span class="hint">No individual part lines required</span></div>
+              <div class="section-head"><div><p class="eyebrow">2 · PARTS</p><h3>Enter one parts total</h3></div><span class="hint">No itemized parts</span></div>
               <div class="parts-grid">
                 <label>Total Parts Cost <input id="partsCost" type="number" min="0" step="0.01"></label>
                 <label>Material Markup <div class="suffix"><input id="partsMarkup" type="number" min="0" max="500" step="0.1"><span>%</span></div></label>
@@ -76,19 +73,19 @@
             </article>
 
             <article class="card table-card labor-card">
-              <div class="section-head padded"><div><p class="eyebrow">STEP 3</p><h3>Labor and service codes</h3></div><button class="btn secondary" id="addLaborLine">Add Labor Code</button></div>
+              <div class="section-head padded"><div><p class="eyebrow">3 · LABOR</p><h3>Add labor or service charges</h3></div><button class="btn outline" id="addLaborLine">Add Labor</button></div>
               <div class="table-wrap"><table class="labor-table"><thead><tr><th>Labor / Service Code</th><th>Qty</th><th>Unit</th><th>Rate</th><th>Discount</th><th>Taxable</th><th>Subtotal</th><th></th></tr></thead><tbody id="quoteLaborBody"></tbody></table></div>
               <div class="policy-strip" id="repairPolicy">The $129 initial visit is applied toward an approved repair. Completed repairs start at $225.</div>
               <label class="credit-check"><input id="initialCredit" type="checkbox"> Apply Initial Visit Credit <b>−$129.00</b></label>
             </article>
 
-            <article class="card form-card">
-              <div class="section-head"><div><p class="eyebrow">STEP 4</p><h3>Scope, terms, and approval</h3></div></div>
+            <details class="card advanced-card">
+              <summary><span><b>More quote details</b><small>Scope, terms and approval</small></span><span class="chevron">⌄</span></summary>
               <div class="form-grid"><label class="wide">Scope of work<textarea id="quoteScope" rows="4"></textarea></label><label class="wide">Exclusions / notes<textarea id="quoteExclusions" rows="3"></textarea></label><label class="wide">Payment terms<textarea id="quoteTerms" rows="2"></textarea></label><label class="wide">Warranty language<textarea id="quoteWarranty" rows="2"></textarea></label><label>Approved by<input id="quoteApprovedBy"></label><label>Approval date<input id="quoteApprovalDate" type="date"></label></div>
-            </article>
+            </details>
           </div>
 
-          <aside class="builder-side"><article class="card summary-card"><p class="eyebrow">QUOTE TOTALS</p><div class="summary-row"><span>Labor subtotal</span><b id="qLaborSubtotal">$0.00</b></div><div class="summary-row"><span>Parts cost</span><b id="qPartsCost">$0.00</b></div><div class="summary-row"><span>Material markup</span><b id="qMarkup">$0.00</b></div><div class="summary-row"><span>Customer parts price</span><b id="qPartsPrice">$0.00</b></div><div class="summary-row"><span>Initial visit credit</span><b id="qCredit">$0.00</b></div><label class="summary-input">Quote discount <div><input id="quoteDiscount" type="number" min="0" max="100" step="0.1"><span>%</span></div></label><div class="summary-row"><span>Discount</span><b id="qDiscountAmount">$0.00</b></div><div class="summary-row"><span>Taxable amount</span><b id="qTaxable">$0.00</b></div><label class="summary-input">Sales tax <div><input id="quoteTaxRate" type="number" min="0" max="20" step="0.001"><span>%</span></div></label><div class="summary-row"><span>Sales tax</span><b id="qTax">$0.00</b></div><label class="summary-input">Deposit requested <div><input id="quoteDeposit" type="number" min="0" max="100" step="1"><span>%</span></div></label><div class="summary-row"><span>Deposit</span><b id="qDepositAmount">$0.00</b></div><div class="grand-total"><span>Quote total</span><strong id="qTotal">$0.00</strong></div><div class="summary-row"><span>Balance due</span><b id="qBalance">$0.00</b></div><button class="btn primary full" id="printQuote">Print / Save PDF</button><button class="btn outline full" id="previewQuote">Customer Preview</button><button class="btn outline full" id="quoteToInvoice">Create Invoice from Quote</button></article></aside>
+          <aside class="builder-side"><article class="card summary-card"><p class="eyebrow">QUOTE SUMMARY</p><div class="summary-row"><span>Labor</span><b id="qLaborSubtotal">$0.00</b></div><div class="summary-row"><span>Parts price</span><b id="qPartsPrice">$0.00</b></div><div class="summary-row"><span>Initial visit credit</span><b id="qCredit">$0.00</b></div><div class="summary-row"><span>Sales tax</span><b id="qTax">$0.00</b></div><div class="grand-total"><span>Total</span><strong id="qTotal">$0.00</strong></div><div class="summary-row"><span>Deposit</span><b id="qDepositAmount">$0.00</b></div><div class="summary-row"><span>Balance after deposit</span><b id="qBalance">$0.00</b></div><details class="summary-options"><summary>Adjust discount, tax or deposit</summary><div class="summary-row"><span>Parts cost</span><b id="qPartsCost">$0.00</b></div><div class="summary-row"><span>Material markup</span><b id="qMarkup">$0.00</b></div><label class="summary-input">Discount <div><input id="quoteDiscount" type="number" min="0" max="100" step="0.1"><span>%</span></div></label><div class="summary-row"><span>Discount amount</span><b id="qDiscountAmount">$0.00</b></div><div class="summary-row"><span>Taxable amount</span><b id="qTaxable">$0.00</b></div><label class="summary-input">Sales tax <div><input id="quoteTaxRate" type="number" min="0" max="20" step="0.001"><span>%</span></div></label><label class="summary-input">Deposit <div><input id="quoteDeposit" type="number" min="0" max="100" step="1"><span>%</span></div></label></details><button class="btn primary full" id="printQuote">Print / Save PDF</button><button class="btn outline full" id="previewQuote">Customer Preview</button><button class="btn outline full" id="quoteToInvoice">Create Invoice from Quote</button></article></aside>
         </div>
       </section>
 

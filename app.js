@@ -60,7 +60,7 @@ function loadState(){try{const saved=JSON.parse(localStorage.getItem(STORAGE_KEY
 function save(){clearTimeout(saveTimer);$("saveState").textContent="Saving…";saveTimer=setTimeout(()=>{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));$("saveState").textContent="Saved locally";renderDashboard()},180)}
 function $(id){return document.getElementById(id)}
 
-const pages={dashboard:["OPERATIONS","Dashboard"],rates:["PRICEBOOK","Labor Rates & Service Charges"],services:["PRICEBOOK","Common Services Pricebook"],quote:["ESTIMATING","Quote Builder"],invoice:["BILLING","Invoice Builder"],settings:["ADMINISTRATION","Company Settings"]};
+const pages={dashboard:["OVERVIEW","Home"],rates:["PRICING","Labor Rates"],services:["PRICING","Services"],quote:["ESTIMATE","New Quote"],invoice:["BILLING","Invoice"],settings:["ACCOUNT","Settings"]};
 function go(view){document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".nav").forEach(x=>x.classList.toggle("active",x.dataset.view===view));$(`${view}View`).classList.add("active");$("pageEyebrow").textContent=pages[view][0];$("pageTitle").textContent=pages[view][1];$("sidebar").classList.remove("open");window.scrollTo({top:0,behavior:"instant"});if(view==="rates")renderRates();if(view==="services")renderServices();if(view==="quote")renderQuote();if(view==="invoice")renderInvoice();if(view==="settings")renderSettings()}
 document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.view)));
 document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.go)));

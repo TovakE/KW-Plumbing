@@ -1,9 +1,10 @@
 # KW Plumbing Pricebook
 
-A dependency-free, browser-based internal pricing, quote, and invoice system for KW Plumbing in the Appleton and Fox Cities area.
+A lightweight, dependency-free internal pricing, quote, and invoice system for KW Plumbing in the Appleton and Fox Cities area.
 
 ## Features
 
+- Simple three-step quote flow with optional details hidden until needed
 - Editable labor rates and service charges with search, duplicate, and archive actions
 - Residential common-services pricebook with scope, labor-hour, and tax defaults
 - Field-friendly quotes using one total parts cost, automatic material markup, and selectable labor codes
