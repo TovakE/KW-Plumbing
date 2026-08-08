@@ -1,16 +1,17 @@
 # KW Plumbing Pricebook
 
-A dependency-free, browser-based flat-rate pricing and quote system for KW Plumbing.
+A dependency-free, browser-based internal pricing, quote, and invoice system for KW Plumbing in the Appleton and Fox Cities area.
 
 ## Features
 
-- Labor-only flat-rate catalog for installations, replacements, diagnostics, and repairs
-- Separate individual-product catalog for fixtures, appliances, valves, and supplied equipment
-- Editable material, hourly labor, and excavation/equipment catalog
+- Editable labor rates and service charges with search, duplicate, and archive actions
+- Residential common-services pricebook with scope, labor-hour, and tax defaults
+- Field-friendly quotes using one total parts cost, automatic material markup, and selectable labor codes
+- Initial-visit credit workflow for approved repairs
 - Wisconsin-oriented tax treatment prompts
-- Customer quote builder with discounts, tax, deposits, and printable estimates
-- Job profit calculator with overhead, contingency, suggested price, and margin checks
-- Company branding and pricing defaults
+- Customer quote builder with discounts, tax, deposits, approval fields, and printable estimates
+- Invoice builder with editable lines, statuses, partial payments, balances, duplication, and printable output
+- Customer records, company branding, payment terms, warranty language, and pricing defaults
 - Automatic browser storage plus JSON backup/import
 - Responsive layout that works on desktop, tablet, and mobile
 
@@ -28,9 +29,9 @@ Then open `http://localhost:8080`.
 
 All company data and quotes are stored in the current browser using `localStorage`. Nothing is transmitted to a server. Export a JSON backup regularly, especially before clearing browser data or changing devices.
 
-## Wisconsin sales tax
+## Pricing and Wisconsin sales tax
 
-Labor and supplied items are separate quote lines. The sample catalog distinguishes original installation from replacement/repair where relevant. Wisconsin generally treats an original bathroom-fixture installation as a real-property improvement, while repair or replacement of bathroom fixtures is generally taxable to the customer. Product tax defaults are intended for replacement work and must be reviewed for original construction. Facts can vary; review Wisconsin Department of Revenue Publication 207 and obtain professional advice for unusual jobs.
+Quotes use a single parts-cost input rather than individual part lines. The app calculates the customer parts price from the editable material markup, then combines it with selected labor codes and quantities. Wisconsin tax treatment varies with the work performed, so parts and each labor line have editable tax controls. Review Wisconsin Department of Revenue Publication 207 and obtain professional advice for unusual jobs.
 
 ## Deployment
 
