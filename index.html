@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Internal pricing, quote, and invoice software for a Fox Cities plumbing company.">
+  <title>KW Plumbing Office</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%23162f49%22/><text x=%2232%22 y=%2240%22 text-anchor=%22middle%22 font-size=%2224%22 font-family=%22Arial%22 font-weight=%22700%22 fill=%22white%22>KW</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><div class="brand-mark">KW</div><div><strong id="sideCompany">KW Plumbing</strong><span>Office</span></div></div>
+      <nav>
+        <button class="nav active" data-view="dashboard"><span>Home</span></button>
+        <button class="nav" data-view="quote"><span>New Quote</span></button>
+        <button class="nav" data-view="invoice"><span>Invoice</span></button>
+        <button class="nav" data-view="rates"><span>Labor Rates</span></button>
+        <button class="nav" data-view="services"><span>Services</span></button>
+        <button class="nav" data-view="settings"><span>Settings</span></button>
+      </nav>
+      <div class="region-card"><b>APPLETON / FOX CITIES</b><span>Data saves on this device</span></div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <button class="menu" id="menuButton" aria-label="Open menu">☰</button>
+        <div><p class="eyebrow" id="pageEyebrow">OVERVIEW</p><h1 id="pageTitle">Home</h1></div>
+        <div class="top-actions"><span class="save-dot"></span><span id="saveState">Saved locally</span></div>
+      </header>
+
+      <section class="view active" id="dashboardView">
+        <div class="welcome"><div><h2>Pricing and billing</h2><p>Create a quote, record parts and labor, then turn it into an invoice.</p></div><div class="welcome-actions"><button class="btn primary" data-go="quote">New Quote</button><button class="btn outline" data-go="invoice">Open Invoice</button></div></div>
+        <div class="stats" id="dashboardStats"></div>
+        <div class="dashboard-grid">
+          <article class="card policy"><div><p class="eyebrow">PRICING POLICY</p><h3>Upfront service pricing</h3><blockquote>The $129 initial visit is applied toward an approved repair. Completed repairs start at $225. Provide upfront pricing before work begins.</blockquote></div></article>
+          <article class="card recent"><div class="section-head"><div><p class="eyebrow">CURRENT WORK</p><h3>Quote and invoice status</h3></div></div><div class="status-list"><div><span>Active quote</span><strong id="dashQuoteTotal">$0.00</strong></div><div><span>Invoice balance</span><strong id="dashInvoiceBalance">$0.00</strong></div><div><span>Invoice status</span><b class="status" id="dashInvoiceStatus">Draft</b></div></div></article>
+        </div>
+      </section>
+
+      <section class="view" id="ratesView">
+        <div class="toolbar"><input id="rateSearch" type="search" placeholder="Search rate codes, charge types, or notes…"><select id="rateFilter"><option value="active">Active rates</option><option value="archived">Archived rates</option><option value="all">All rates</option></select><button class="btn primary" id="addRate">Add Rate</button></div>
+        <article class="card table-card"><div class="table-wrap"><table><thead><tr><th>Rate Code</th><th>Charge Type</th><th>Rate</th><th>Unit</th><th>Typical Use</th><th>Internal Notes</th><th></th></tr></thead><tbody id="ratesBody"></tbody></table></div></article>
+      </section>
+
+      <section class="view" id="servicesView">
+        <div class="toolbar"><input id="serviceSearch" type="search" placeholder="Search residential services…"><select id="serviceCategory"><option value="all">All categories</option></select><select id="serviceFilter"><option value="active">Active services</option><option value="archived">Archived services</option><option value="all">All services</option></select><button class="btn primary" id="addService">Add Service</button></div>
+        <article class="card table-card"><div class="table-wrap"><table><thead><tr><th>Code</th><th>Category</th><th>Description</th><th>Flat Rate</th><th>Labor Hrs</th><th>Taxable</th><th>Scope / Exclusions</th><th></th></tr></thead><tbody id="servicesBody"></tbody></table></div></article>
+      </section>
+
+      <section class="view" id="quoteView">
+        <div class="builder-layout">
+          <div class="builder-main">
+            <article class="card form-card">
+              <div class="section-head"><div><p class="eyebrow">1 · CUSTOMER</p><h3>Who is the job for?</h3></div><div class="document-no"><span>Quote</span><b id="quoteNumberText">Q-0001</b></div></div>
+              <div class="form-grid">
+                <label>Saved customer<select id="quoteCustomerSelect"></select></label><label>Customer name<input id="quoteCustomerName" required></label>
+                <label>Phone<input id="quoteCustomerPhone"></label><label>Email<input id="quoteCustomerEmail" type="email"></label>
+                <label class="wide">Job address<input id="quoteAddress"></label><label>Quote date<input id="quoteDate" type="date"></label><label>Expiration date<input id="quoteExpires" type="date"></label>
+              </div>
+            </article>
+
+            <article class="card form-card parts-card">
+              <div class="section-head"><div><p class="eyebrow">2 · PARTS</p><h3>Enter one parts total</h3></div><span class="hint">No itemized parts</span></div>
+              <div class="parts-grid">
+                <label>Total Parts Cost <input id="partsCost" type="number" min="0" step="0.01"></label>
+                <label>Material Markup <div class="suffix"><input id="partsMarkup" type="number" min="0" max="500" step="0.1"><span>%</span></div></label>
+                <div class="calculated"><span>Markup amount</span><strong id="partsMarkupAmount">$0.00</strong></div>
+                <div class="calculated important"><span>Customer Parts Price</span><strong id="customerPartsPrice">$0.00</strong></div>
+                <label class="check"><input id="partsTaxable" type="checkbox"> Parts are taxable on this quote</label>
+              </div>
+            </article>
+
+            <article class="card table-card labor-card">
+              <div class="section-head padded"><div><p class="eyebrow">3 · LABOR</p><h3>Add labor or service charges</h3></div><button class="btn outline" id="addLaborLine">Add Labor</button></div>
+              <div class="table-wrap"><table class="labor-table"><thead><tr><th>Labor / Service Code</th><th>Qty</th><th>Unit</th><th>Rate</th><th>Discount</th><th>Taxable</th><th>Subtotal</th><th></th></tr></thead><tbody id="quoteLaborBody"></tbody></table></div>
+              <div class="policy-strip" id="repairPolicy">The $129 initial visit is applied toward an approved repair. Completed repairs start at $225.</div>
+              <label class="credit-check"><input id="initialCredit" type="checkbox"> Apply Initial Visit Credit <b>−$129.00</b></label>
+            </article>
+
+            <details class="card advanced-card">
+              <summary><span><b>More quote details</b><small>Scope, terms and approval</small></span><span class="chevron">⌄</span></summary>
+              <div class="form-grid"><label class="wide">Scope of work<textarea id="quoteScope" rows="4"></textarea></label><label class="wide">Exclusions / notes<textarea id="quoteExclusions" rows="3"></textarea></label><label class="wide">Payment terms<textarea id="quoteTerms" rows="2"></textarea></label><label class="wide">Warranty language<textarea id="quoteWarranty" rows="2"></textarea></label><label>Approved by<input id="quoteApprovedBy"></label><label>Approval date<input id="quoteApprovalDate" type="date"></label></div>
+            </details>
+          </div>
+
+          <aside class="builder-side"><article class="card summary-card"><p class="eyebrow">QUOTE SUMMARY</p><div class="summary-row"><span>Labor</span><b id="qLaborSubtotal">$0.00</b></div><div class="summary-row"><span>Parts price</span><b id="qPartsPrice">$0.00</b></div><div class="summary-row"><span>Initial visit credit</span><b id="qCredit">$0.00</b></div><div class="summary-row"><span>Sales tax</span><b id="qTax">$0.00</b></div><div class="grand-total"><span>Total</span><strong id="qTotal">$0.00</strong></div><div class="summary-row"><span>Deposit</span><b id="qDepositAmount">$0.00</b></div><div class="summary-row"><span>Balance after deposit</span><b id="qBalance">$0.00</b></div><details class="summary-options"><summary>Adjust discount, tax or deposit</summary><div class="summary-row"><span>Parts cost</span><b id="qPartsCost">$0.00</b></div><div class="summary-row"><span>Material markup</span><b id="qMarkup">$0.00</b></div><label class="summary-input">Discount <div><input id="quoteDiscount" type="number" min="0" max="100" step="0.1"><span>%</span></div></label><div class="summary-row"><span>Discount amount</span><b id="qDiscountAmount">$0.00</b></div><div class="summary-row"><span>Taxable amount</span><b id="qTaxable">$0.00</b></div><label class="summary-input">Sales tax <div><input id="quoteTaxRate" type="number" min="0" max="20" step="0.001"><span>%</span></div></label><label class="summary-input">Deposit <div><input id="quoteDeposit" type="number" min="0" max="100" step="1"><span>%</span></div></label></details><button class="btn primary full" id="printQuote">Print / Save PDF</button><button class="btn outline full" id="previewQuote">Customer Preview</button><button class="btn outline full" id="quoteToInvoice">Create Invoice from Quote</button></article></aside>
+        </div>
+      </section>
+
+      <section class="view" id="invoiceView">
+        <div class="builder-layout">
+          <div class="builder-main">
+            <article class="card form-card"><div class="section-head"><div><p class="eyebrow">INVOICE DETAILS</p><h3>Billing document</h3></div><div class="document-no"><span>Invoice</span><b id="invoiceNumberText">INV-0001</b></div></div><div class="form-grid"><label>Customer name<input id="invoiceCustomer"></label><label>Status<select id="invoiceStatus"><option>Draft</option><option>Sent</option><option>Approved</option><option>Partially Paid</option><option>Paid</option><option>Overdue</option><option>Void</option></select></label><label class="wide">Service address<input id="invoiceAddress"></label><label>Issue date<input id="invoiceIssue" type="date"></label><label>Due date<input id="invoiceDue" type="date"></label><label class="wide">Payment terms<input id="invoiceTerms"></label><label class="wide">Work performed<textarea id="invoiceScope" rows="4"></textarea></label></div></article>
+            <article class="card table-card"><div class="section-head padded"><div><p class="eyebrow">INVOICE LINES</p><h3>Labor and parts summary</h3></div><div><button class="btn outline" id="addInvoiceLine">Add Line</button> <button class="btn outline" id="syncInvoiceQuote">Reuse Current Quote</button></div></div><div class="table-wrap"><table><thead><tr><th>Description</th><th>Qty</th><th>Rate</th><th>Tax</th><th>Amount</th><th></th></tr></thead><tbody id="invoiceLinesBody"></tbody></table></div></article>
+            <article class="card table-card"><div class="section-head padded"><div><p class="eyebrow">PAYMENTS</p><h3>Payment history</h3></div><button class="btn secondary" id="recordPayment">Record Partial Payment</button></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Method / Note</th><th>Amount</th><th></th></tr></thead><tbody id="paymentsBody"></tbody></table></div></article>
+          </div>
+          <aside class="builder-side"><article class="card summary-card"><p class="eyebrow">PAYMENT SUMMARY</p><div class="summary-row"><span>Subtotal</span><b id="iSubtotal">$0.00</b></div><div class="summary-row"><span>Sales tax</span><b id="iTax">$0.00</b></div><div class="summary-row"><span>Invoice total</span><b id="iTotal">$0.00</b></div><div class="summary-row"><span>Amount paid</span><b id="iPaid">$0.00</b></div><div class="grand-total"><span>Balance due</span><strong id="iBalance">$0.00</strong></div><button class="btn success full" id="markPaid">Mark Paid</button><button class="btn outline full" id="duplicateInvoice">Duplicate</button><button class="btn primary full" id="printInvoice">Print</button><button class="btn outline full" id="downloadInvoice">Download PDF</button></article></aside>
+        </div>
+      </section>
+
+      <section class="view" id="settingsView">
+        <div class="settings-grid">
+          <article class="card form-card"><div class="section-head"><div><p class="eyebrow">COMPANY PROFILE</p><h3>Customer-facing details</h3></div><div class="logo-placeholder">LOGO</div></div><div class="form-grid"><label>Company name<input id="companyName"></label><label>License number<input id="companyLicense"></label><label class="wide">Address<input id="companyAddress"></label><label>Phone<input id="companyPhone"></label><label>Email<input id="companyEmail" type="email"></label></div></article>
+          <article class="card form-card"><div class="section-head"><div><p class="eyebrow">DOCUMENT DEFAULTS</p><h3>Taxes and terms</h3></div></div><div class="form-grid"><label>Default sales tax (%)<input id="settingTax" type="number" step="0.001"></label><label>Default material markup (%)<input id="settingMarkup" type="number" step="0.1"></label><label>Default deposit (%)<input id="settingDeposit" type="number" step="1"></label><label>Quote expiration (days)<input id="settingExpiration" type="number" step="1"></label><label class="wide">Payment terms<textarea id="settingTerms" rows="2"></textarea></label><label class="wide">Warranty language<textarea id="settingWarranty" rows="3"></textarea></label><label class="wide">Invoice footer<textarea id="settingFooter" rows="2"></textarea></label></div></article>
+          <article class="card form-card"><div class="section-head"><div><p class="eyebrow">CUSTOMERS</p><h3>Saved customer records</h3></div><button class="btn secondary" id="addCustomer">Add Customer</button></div><div class="table-wrap"><table><thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th></th></tr></thead><tbody id="customersBody"></tbody></table></div></article>
+          <article class="card data-panel"><div><p class="eyebrow">LOCAL DATA</p><h3>Backup and restore</h3><p>All data stays in this browser. Export a backup before clearing browser data or moving devices.</p></div><div><button class="btn outline" id="exportData">Export Backup</button><label class="btn outline file-btn">Import Backup<input id="importData" type="file" accept="application/json"></label><button class="btn danger" id="resetData">Reset Sample Data</button></div></article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="editDialog"><form method="dialog" id="editForm"><div class="dialog-head"><div><p class="eyebrow" id="dialogEyebrow">EDIT</p><h3 id="dialogTitle">Edit item</h3></div><button class="icon-btn" value="cancel">×</button></div><div class="dialog-body" id="dialogFields"></div><div class="dialog-actions"><button class="btn outline" value="cancel">Cancel</button><button class="btn primary" id="dialogSave" value="default">Save</button></div></form></dialog>
+
+  <dialog id="previewDialog" class="preview-dialog"><div class="preview-actions"><button class="btn outline" id="closePreview">Close</button><button class="btn primary" id="printPreview">Print / Save PDF</button></div><article class="document" id="documentPreview"></article></dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
