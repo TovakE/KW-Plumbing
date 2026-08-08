@@ -4,7 +4,9 @@ A dependency-free, browser-based flat-rate pricing and quote system for KW Plumb
 
 ## Features
 
-- Editable service, material, labor, and excavation catalog
+- Labor-only flat-rate catalog for installations, replacements, diagnostics, and repairs
+- Separate individual-product catalog for fixtures, appliances, valves, and supplied equipment
+- Editable material, hourly labor, and excavation/equipment catalog
 - Wisconsin-oriented tax treatment prompts
 - Customer quote builder with discounts, tax, deposits, and printable estimates
 - Job profit calculator with overhead, contingency, suggested price, and margin checks
@@ -28,7 +30,7 @@ All company data and quotes are stored in the current browser using `localStorag
 
 ## Wisconsin sales tax
 
-The sample catalog distinguishes original installation from replacement/repair where relevant. Wisconsin generally treats an original bathroom-fixture installation as a real-property improvement, while repair or replacement of bathroom fixtures is generally taxable to the customer. Facts can vary; review Wisconsin Department of Revenue Publication 207 and obtain professional advice for unusual jobs.
+Labor and supplied items are separate quote lines. The sample catalog distinguishes original installation from replacement/repair where relevant. Wisconsin generally treats an original bathroom-fixture installation as a real-property improvement, while repair or replacement of bathroom fixtures is generally taxable to the customer. Product tax defaults are intended for replacement work and must be reviewed for original construction. Facts can vary; review Wisconsin Department of Revenue Publication 207 and obtain professional advice for unusual jobs.
 
 ## Deployment
 
